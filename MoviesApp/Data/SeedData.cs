@@ -15,7 +15,7 @@ namespace MoviesApp.Data
                 serviceProvider.GetRequiredService<
                     DbContextOptions<MoviesContext>>()))
             {
-                // Look for any movies.
+                //movies.
                 if (!context.Movies.Any())
                 {
                     context.Movies.AddRange(
@@ -55,9 +55,8 @@ namespace MoviesApp.Data
 
                     context.SaveChanges();
                 }
-                
-                
 
+                //actors.
                 if (!context.Actors.Any())
                 {
                     context.Actors.AddRange(
