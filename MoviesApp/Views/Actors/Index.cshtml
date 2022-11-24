@@ -1,11 +1,11 @@
-@using System.Linq
-@model IEnumerable<MoviesApp.ViewModels.Movies.MovieViewModel>
+﻿@using System.Linq
+@model IEnumerable<MoviesApp.ViewModels.Actors.ActorViewModel>
 
 @{
-    ViewData["Title"] = "Index Movies";
+    ViewData["Title"] = "Index Actors";
 }
 
-<h1>Index Movies</h1>
+<h1>Index Actors</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,16 +14,13 @@
     <thead>
     <tr>
         <th>
-            <label asp-for="@Model.First().Title"></label>
+            <label asp-for="@Model.First().Name"></label>
         </th>
         <th>
-             <label asp-for="@Model.First().ReleaseDate"></label>
+            <label asp-for="@Model.First().Surname"></label>
         </th>
         <th>
-            <label asp-for="@Model.First().Genre"></label>
-        </th>
-        <th>
-            <label asp-for="@Model.First().Price"></label>
+            <label asp-for="@Model.First().DateOfBirth"></label>
         </th>
         <th></th>
     </tr>
@@ -32,17 +29,15 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @item.Title
+                @item.Name
             </td>
             <td>
-                @item.ReleaseDate.ToString("dd.MM.yyyy")
+                @item.Surname
             </td>
             <td>
-                @item.Genre
+                @item.DateOfBirth.ToString("dd.MM.yyyy")
             </td>
-            <td>
-                @item.Price
-            </td>
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

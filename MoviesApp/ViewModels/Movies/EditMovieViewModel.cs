@@ -1,4 +1,4 @@
-namespace MoviesApp.ViewModels
+namespace MoviesApp.ViewModels.Movies
 {
     public class EditMovieViewModel:InputMovieViewModel
     {
