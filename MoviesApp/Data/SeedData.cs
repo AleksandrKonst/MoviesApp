@@ -16,47 +16,85 @@ namespace MoviesApp.Data
                     DbContextOptions<MoviesContext>>()))
             {
                 // Look for any movies.
-                if (context.Movies.Any())
+                if (!context.Movies.Any())
                 {
-                    return;   // DB has been seeded
+                    context.Movies.AddRange(
+                        new Movie
+                        {
+                            Title = "When Harry Met Sally",
+                            ReleaseDate = DateTime.Parse("1989-2-12"),
+                            Genre = "Romantic Comedy",
+                            Price = 7.99M
+                        },
+
+
+                        new Movie
+                        {
+                            Title = "Ghostbusters ",
+                            ReleaseDate = DateTime.Parse("1984-3-13"),
+                            Genre = "Comedy",
+                            Price = 8.99M
+                        },
+
+                        new Movie
+                        {
+                            Title = "Ghostbusters 2",
+                            ReleaseDate = DateTime.Parse("1986-2-23"),
+                            Genre = "Comedy",
+                            Price = 9.99M
+                        },
+
+                        new Movie
+                        {
+                            Title = "Rio Bravo",
+                            ReleaseDate = DateTime.Parse("1959-4-15"),
+                            Genre = "Western",
+                            Price = 3.99M
+                        }
+                    );
+
+                    context.SaveChanges();
                 }
                 
-                context.Movies.AddRange(
-                    new Movie
-                    {
-                        Title = "When Harry Met Sally",
-                        ReleaseDate = DateTime.Parse("1989-2-12"),
-                        Genre = "Romantic Comedy",
-                        Price = 7.99M
-                    },
-                    
-
-                    new Movie
-                    {
-                        Title = "Ghostbusters ",
-                        ReleaseDate = DateTime.Parse("1984-3-13"),
-                        Genre = "Comedy",
-                        Price = 8.99M
-                    },
-
-                    new Movie
-                    {
-                        Title = "Ghostbusters 2",
-                        ReleaseDate = DateTime.Parse("1986-2-23"),
-                        Genre = "Comedy",
-                        Price = 9.99M
-                    },
-
-                    new Movie
-                    {
-                        Title = "Rio Bravo",
-                        ReleaseDate = DateTime.Parse("1959-4-15"),
-                        Genre = "Western",
-                        Price = 3.99M
-                    }
-                );
                 
-                context.SaveChanges();
+
+                if (!context.Actors.Any())
+                {
+                    context.Actors.AddRange(
+                        new Actor
+                        {
+                            Name = "Василий",
+                            Surname = "Иванов",
+                            DateOfBirth = new DateTime(1980, 7, 20)
+                        },
+                        new Actor
+                        {
+                            Name = "Иван",
+                            Surname = "Васильев",
+                            DateOfBirth = new DateTime(1988, 6, 12)
+                        },
+                        new Actor
+                        {
+                            Name = "Григорий",
+                            Surname = "Водовозов",
+                            DateOfBirth = new DateTime(1980, 4, 20)
+                        },
+                        new Actor
+                        {
+                            Name = "Владислав",
+                            Surname = "Куколев",
+                            DateOfBirth = new DateTime(1980, 7, 23)
+                        },
+                        new Actor
+                        {
+                            Name = "Владислав",
+                            Surname = "Киселев",
+                            DateOfBirth = new DateTime(1982, 12, 1)
+                        }
+                    );
+
+                    context.SaveChanges();
+                }               
             }
         }
     }
