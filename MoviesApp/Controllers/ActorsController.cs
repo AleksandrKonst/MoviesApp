@@ -8,13 +8,13 @@ using MoviesApp.ViewModels.Actors;
 
 namespace MoviesApp.Controllers;
 
-public class Actors : Controller
+public class ActorsController : Controller
 {
     private readonly MoviesContext _context;
     private readonly ILogger<HomeController> _logger;
 
 
-    public Actors(MoviesContext context, ILogger<HomeController> logger)
+    public ActorsController(MoviesContext context, ILogger<HomeController> logger)
     {
         _context = context;
         _logger = logger;
