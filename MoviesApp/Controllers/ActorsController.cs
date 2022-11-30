@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,26 +14,23 @@ public class ActorsController : Controller
 {
     private readonly MoviesContext _context;
     private readonly ILogger<HomeController> _logger;
+    private readonly IMapper _mapper;
 
 
-    public ActorsController(MoviesContext context, ILogger<HomeController> logger)
+    public ActorsController(MoviesContext context, ILogger<HomeController> logger, IMapper mapper)
     {
         _context = context;
         _logger = logger;
+        _mapper = mapper;
     }
-    
+
     [HttpGet]
     public IActionResult Index()
     {
-        return View(_context.Actors.Select(a => new ActorViewModel
-        {
-            Id = a.Id,
-            Name = a.Name,
-            Surname = a.Surname,
-            DateOfBirth = a.DateOfBirth    
-        }).ToList());
+        var actors = _mapper.Map<IEnumerable<Actor>, IEnumerable<ActorViewModel>>(_context.Actors.ToList());
+        return View(actors);
     }
-    
+
     [HttpGet]
     public IActionResult Details(int? id)
     {
@@ -40,15 +39,8 @@ public class ActorsController : Controller
             return NotFound();
         }
 
-        var viewModel = _context.Actors.Where(a => a.Id == id).Select(a => new ActorViewModel
-        {
-            Id = a.Id,
-            Name = a.Name,
-            Surname = a.Surname,
-            DateOfBirth = a.DateOfBirth
-        }).FirstOrDefault();
+        var viewModel = _mapper.Map<ActorViewModel>(_context.Actors.FirstOrDefault(m => m.Id == id));
 
-            
         if (viewModel == null)
         {
             return NotFound();
@@ -56,7 +48,7 @@ public class ActorsController : Controller
 
         return View(viewModel);
     }
-        
+
     [HttpGet]
     public IActionResult Create()
     {
@@ -69,12 +61,7 @@ public class ActorsController : Controller
     {
         if (ModelState.IsValid)
         {
-            _context.Add(new Actor
-            {
-                Name = inputModel.Name,
-                Surname = inputModel.Surname,
-                DateOfBirth = inputModel.DateOfBirth
-            });
+            _context.Add(_mapper.Map<Actor>(inputModel));
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
@@ -90,13 +77,8 @@ public class ActorsController : Controller
             return NotFound();
         }
 
-        var editModel = _context.Actors.Where(a => a.Id == id).Select(a => new EditActorViewModel
-        {
-            Name = a.Name,
-            Surname = a.Surname,
-            DateOfBirth = a.DateOfBirth
-        }).FirstOrDefault();
-            
+        var editModel = _mapper.Map<EditActorViewModel>(_context.Actors.FirstOrDefault(m => m.Id == id));
+
         if (editModel == null)
         {
             return NotFound();
@@ -113,14 +95,8 @@ public class ActorsController : Controller
         {
             try
             {
-                var actor = new Actor
-                {
-                    Id = id,
-                    Name = editModel.Name,
-                    Surname = editModel.Surname,
-                    DateOfBirth = editModel.DateOfBirth
-                };
-                    
+                var actor = _mapper.Map<Actor>(editModel);
+                actor.Id = id;
                 _context.Update(actor);
                 _context.SaveChanges();
             }
@@ -148,13 +124,8 @@ public class ActorsController : Controller
             return NotFound();
         }
 
-        var deleteModel = _context.Actors.Where(a => a.Id == id).Select(a => new DeleteActorViewModel
-        {
-            Name = a.Name,
-            Surname = a.Surname,
-            DateOfBirth = a.DateOfBirth
-        }).FirstOrDefault();
-            
+        var deleteModel = _mapper.Map<DeleteActorViewModel>(_context.Actors.FirstOrDefault(m => m.Id == id));
+
         if (deleteModel == null)
         {
             return NotFound();
