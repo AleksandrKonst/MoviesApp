@@ -19,7 +19,7 @@ public class ActorLenghtAttribute : ValidationAttribute
     {
         if (value is string)
         {
-            int length = ((string) value).Length;
+            var length = ((string) value).Length;
 
             if (length < WordLenght)
             {
@@ -29,6 +29,6 @@ public class ActorLenghtAttribute : ValidationAttribute
             return ValidationResult.Success;
         }
         
-        return new ValidationResult(GetErrorMessage());
+        return new ValidationResult("Bad type");
     }
 }
