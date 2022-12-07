@@ -7,20 +7,21 @@ public class ActorLenghtAttribute : ValidationAttribute
 {
     public ActorLenghtAttribute(int lenght)
     {
+        WordLenght = lenght;
     }
-    
-    public int lenght { get; }
+
+    private int WordLenght { get; }
     
     public string GetErrorMessage() =>
-        $"Lenght must be more {lenght} .";
+        $"Lenght must be more {WordLenght} .";
 
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        if (value is Int32)
+        if (value is string)
         {
-            var lenght = (int) value;
+            int length = ((string) value).Length;
 
-            if (lenght < this.lenght)
+            if (length < WordLenght)
             {
                 return new ValidationResult(GetErrorMessage());
             }
