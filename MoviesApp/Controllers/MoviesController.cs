@@ -8,6 +8,7 @@ using MoviesApp.Data;
 using MoviesApp.Models;
 using MoviesApp.ViewModels.Movies;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MoviesApp.Controllers
 {
@@ -25,6 +26,7 @@ namespace MoviesApp.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Index()
         {
             var movies = _mapper.Map<IEnumerable<Movie>, IEnumerable<MovieViewModel>>(_context.Movies.ToList());
@@ -32,6 +34,7 @@ namespace MoviesApp.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -50,6 +53,7 @@ namespace MoviesApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -57,6 +61,7 @@ namespace MoviesApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create([Bind("Title,ReleaseDate,Genre,Price")] InputMovieViewModel inputModel)
         {
             if (ModelState.IsValid)
@@ -70,6 +75,7 @@ namespace MoviesApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -89,6 +95,7 @@ namespace MoviesApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id, [Bind("Title,ReleaseDate,Genre,Price")] EditMovieViewModel editModel)
         {
             if (ModelState.IsValid)
@@ -117,6 +124,7 @@ namespace MoviesApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -136,6 +144,7 @@ namespace MoviesApp.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteConfirmed(int id)
         {
             var movie = _context.Movies.Find(id);

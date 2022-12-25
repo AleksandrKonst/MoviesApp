@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,7 @@ public class ActorsController : Controller
     }
 
     [HttpGet]
+    [Authorize]
     public IActionResult Index()
     {
         var actors = _mapper.Map<IEnumerable<ActorDto>, IEnumerable<ActorViewModel>>(_service.GetAllActors());
@@ -34,6 +36,7 @@ public class ActorsController : Controller
     }
 
     [HttpGet]
+    [Authorize]
     public IActionResult Details(int? id)
     {
         if (id == null)
@@ -52,6 +55,7 @@ public class ActorsController : Controller
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public IActionResult Create()
     {
         return View();
@@ -60,6 +64,7 @@ public class ActorsController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     [ActorDate]
+    [Authorize(Roles = "Admin")]
     public IActionResult Create([Bind("Name,Surname,DateOfBirth")] InputActorsModel inputModel)
     {
         if (ModelState.IsValid)
@@ -71,6 +76,7 @@ public class ActorsController : Controller
     }
         
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public IActionResult Edit(int? id)
     {
         if (id == null)
@@ -91,6 +97,7 @@ public class ActorsController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     [ActorDate]
+    [Authorize(Roles = "Admin")]
     public IActionResult Edit(int id, [Bind("Name,Surname,DateOfBirth")] EditActorViewModel editModel)
     {
         if (ModelState.IsValid)
@@ -111,6 +118,7 @@ public class ActorsController : Controller
     }
         
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public IActionResult Delete(int? id)
     {
         if (id == null)
@@ -130,6 +138,7 @@ public class ActorsController : Controller
         
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public IActionResult DeleteConfirmed(int id)
     {
         var actor = _service.DeleteActor(id);
