@@ -1,23 +1,23 @@
 # MoviesApp
 
 ## Актеры
-![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/d7ea2ba1-16b1-45ee-b0b3-6bb991c62bf5)
+![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/4fd82183-a42e-4b4c-95b5-d8a796a080be)
 
 ### Детали
-![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/c8b7198c-bcb2-4058-bb96-c4c804aec246)
+![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/a2086dcd-5a66-423f-a4f5-e718c7f9e463)
 
 ### Изменение
-![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/51d44427-41c6-4cb3-9ba1-01f040cb757d)
+![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/7f0c3119-b998-4755-b144-95590a00b724)
 
 ## Аунтификация
-![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/2610a806-9b67-4345-8e13-1a8e6b3281c9)
+![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/d4252b7e-d850-4df2-a609-c9d9555588a3)
 
 ## WebApi
 ### Get: https://localhost:5001/api/Actors
-![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/c0c8b882-ced3-4e6e-9082-a1e22a824c76)
+![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/7a2b0b66-508f-4298-90d5-db9f1bc0f834)
 
 ### Get: https://localhost:5001/api/Actors/4
-![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/28007d26-88eb-4aea-ac90-e4df94ff98c4)
+![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/0c0a2804-8b30-43a5-a215-9cb5c3f490e4)
 
 ### Delete: https://localhost:5001/api/Actors/4
-![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/15c9ac9d-1375-46fc-a825-1eebd064ab19)
+![image](https://github.com/AleksandrKonst/MoviesApp/assets/40522320/de188a83-742e-437e-8407-6bb12ad7eed0)
